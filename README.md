@@ -85,3 +85,29 @@ If you prefer to use the pure C++ backend without the web UI, you can run it int
 ./backend
 ```
 *This will open the CLI menu where you can insert students, sort by names/grades, view statistics, and search for specific records.*
+
+#### Terminal CLI Previews
+<div align="center">
+  <img src="screenshots/img5.png" alt="Terminal Menu" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 1: Insert new student</b><br/>
+  <img src="screenshots/choice1.png" alt="Choice 1" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 2: Search for a student</b><br/>
+  <img src="screenshots/choice2.png" alt="Choice 2" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 3: Print all students (Code Ascending)</b><br/>
+  <img src="screenshots/choice3.png" alt="Choice 3" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 4: Print students with a >= given percentage</b><br/>
+  <img src="screenshots/choice4.png" alt="Choice 4" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 5: Sort and Print all students by Name</b><br/>
+  <img src="screenshots/choice5.png" alt="Choice 5" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 6: Sort and Print all students by Grade/Percentage</b><br/>
+  <img src="screenshots/img_choice6.png" alt="Choice 6" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <b>Choice 7 & 8: View Class Statistics & Quit</b><br/>
+  <img src="screenshots/img_choice7_8.png" alt="Choice 7 and 8" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+</div>
