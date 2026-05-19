@@ -1,5 +1,16 @@
 # Student Grade Checker & Management System (C++ & PEP)
 
+<div align="center">
+  <h3>📸 Project Previews</h3>
+  <img src="screenshots/dashboard.png" alt="Dashboard Overview" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <img src="screenshots/manage_students.png" alt="Manage Students & Add New" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <img src="screenshots/report_card.png" alt="Student Report Card Modal" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+  <br/>
+  <img src="screenshots/print_preview.png" alt="Print to PDF Preview" width="800" style="border-radius: 8px; margin-bottom: 15px;"/>
+</div>
+
 A hybrid full-stack **Student Grade Checker and Management System** that combines the raw performance of a **C++ backend** with a beautiful, modern **Glassmorphism Web Dashboard** via a **Node.js bridge**.
 
 ## 🚀 Features
