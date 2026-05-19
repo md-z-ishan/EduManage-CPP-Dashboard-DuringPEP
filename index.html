@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Checker & Management System</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-graduation-cap"></i> EduManage</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-target="dashboard-view"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="#" class="nav-item" data-target="manage-view"><i class="fa-solid fa-users-cog"></i> Manage Students</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="theme-btn">
+                    <i class="fa-solid fa-moon"></i> Dark Mode
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p id="page-subtitle">Overview of student performance</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-highlight">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="global-search" placeholder="Quick search...">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view-section active">
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6;">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Students</h3>
+                            <p id="stat-total">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Average Marks</h3>
+                            <p id="stat-average">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Highest Marks</h3>
+                            <p id="stat-highest">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">
+                            <i class="fa-solid fa-arrow-trend-down"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Lowest Marks</h3>
+                            <p id="stat-lowest">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Top Performers -->
+                <div class="dashboard-widgets">
+                    <div class="widget chart-widget">
+                        <h3>Subject-wise Analytics (Average)</h3>
+                        <div class="chart-container">
+                            <canvas id="analyticsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="widget top-performers-widget">
+                        <h3>Top Performers</h3>
+                        <ul id="top-performers-list" class="performers-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manage Students View -->
+            <section id="manage-view" class="view-section">
+                
+                <div class="manage-layout">
+                    <!-- Add/Edit Form -->
+                    <div class="form-panel glass-panel">
+                        <h3 id="form-title">Add New Student</h3>
+                        <form id="student-form">
+                            <input type="hidden" id="edit-id">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="rollno">Roll Number / ID</label>
+                                <input type="text" id="rollno" required placeholder="e.g. 101">
+                            </div>
+                            
+                            <h4 class="subjects-title">Subject Marks (Out of 100)</h4>
+                            <div class="subjects-grid">
+                                <div class="form-group">
+                                    <label for="maths">Maths</label>
+                                    <input type="number" id="maths" min="0" max="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="science">Science</label>
+                                    <input type="number" id="science" min="0" max="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="english">English</label>
+                                    <input type="number" id="english" min="0" max="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="history">History</label>
+                                    <input type="number" id="history" min="0" max="100" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" id="save-btn">Save Student</button>
+                                <button type="button" class="btn btn-secondary" id="cancel-btn" style="display:none;">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Students List & Tools -->
+                    <div class="list-panel glass-panel">
+                        <div class="list-tools">
+                            <div class="filter-group">
+                                <select id="filter-grade">
+                                    <option value="ALL">All Grades</option>
+                                    <option value="A">Grade A (90-100)</option>
+                                    <option value="B">Grade B (80-89)</option>
+                                    <option value="C">Grade C (70-79)</option>
+                                    <option value="D">Grade D (60-69)</option>
+                                    <option value="F">Grade F (<60)</option>
+                                </select>
+                                <select id="sort-by">
+                                    <option value="default">Sort By: Default</option>
+                                    <option value="name-asc">Name (A-Z)</option>
+                                    <option value="marks-desc">Marks (High-Low)</option>
+                                    <option value="marks-asc">Marks (Low-High)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="students-table">
+                                <thead>
+                                    <tr>
+                                        <th>Roll No</th>
+                                        <th>Name</th>
+                                        <th>Total</th>
+                                        <th>%</th>
+                                        <th>Grade</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="students-table-body">
+                                    <!-- Rows Populated by JS -->
+                                </tbody>
+                            </table>
+                            <div id="no-data-msg" class="no-data">
+                                <p>No students found. Add a new student.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Student Profile Modal (Report Card) -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content glass-panel" id="printable-area">
+            <span class="close-modal">&times;</span>
+            <div class="report-header">
+                <h2>Student Report Card</h2>
+                <p>EduManage High School</p>
+            </div>
+            
+            <div class="report-body">
+                <div class="student-info">
+                    <p><strong>Name:</strong> <span id="modal-name"></span></p>
+                    <p><strong>Roll No:</strong> <span id="modal-rollno"></span></p>
+                </div>
+                
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Max Marks</th>
+                            <th>Marks Obtained</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maths</td>
+                            <td>100</td>
+                            <td id="modal-maths"></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td>100</td>
+                            <td id="modal-science"></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>100</td>
+                            <td id="modal-english"></td>
+                        </tr>
+                        <tr>
+                            <td>History</td>
+                            <td>100</td>
+                            <td id="modal-history"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="report-summary">
+                    <div class="summary-box">
+                        <h4>Total Marks</h4>
+                        <p id="modal-total"></p>
+                    </div>
+                    <div class="summary-box">
+                        <h4>Percentage</h4>
+                        <p id="modal-percentage"></p>
+                    </div>
+                    <div class="summary-box">
+                        <h4>Grade</h4>
+                        <p id="modal-grade" class="grade-badge"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions no-print">
+                <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
